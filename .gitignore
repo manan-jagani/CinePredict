@@ -7,7 +7,7 @@ venv/
 .venv/
 env/
 
-# Jupyter
+# Jupyter nb
 .ipynb_checkpoints/
 
 # macOS
