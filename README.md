@@ -21,7 +21,7 @@ Our experiments show that **Item-Based Collaborative Filtering with residual cos
 
 ---
 
-## 🎯 Objectives
+## 🎯 Objectivess
 
 - Compare personalized collaborative filtering with non-personalized baselines.
 - Evaluate user-based KNN and item-based KNN.
