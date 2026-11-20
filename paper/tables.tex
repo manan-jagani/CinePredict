@@ -1,0 +1,39 @@
+\begin{table*}[t]
+\centering
+\caption{Test-set results (mean\,$\pm$\,std over three random 80/20 per-user splits). Rating metrics: lower is better. Ranking metrics at $K{=}10$ (relevant = held-out rating $\geq 4$): higher is better. Best per column in bold.}
+\label{tab:main}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+Model & RMSE & MAE & P@10 & R@10 & NDCG@10 & HR@10 \\
+\midrule
+Global mean & 1.045\,$\pm$\,0.003 & 0.829\,$\pm$\,0.002 & -- & -- & -- & -- \\
+Popularity (rating count) & -- & -- & 0.117\,$\pm$\,0.003 & 0.096\,$\pm$\,0.004 & 0.155\,$\pm$\,0.007 & 0.553\,$\pm$\,0.012 \\
+Popularity (damped mean) & 0.977\,$\pm$\,0.006 & 0.763\,$\pm$\,0.003 & 0.098\,$\pm$\,0.002 & 0.075\,$\pm$\,0.003 & 0.122\,$\pm$\,0.003 & 0.487\,$\pm$\,0.010 \\
+Bias baseline & 0.876\,$\pm$\,0.007 & 0.676\,$\pm$\,0.004 & 0.080\,$\pm$\,0.005 & 0.058\,$\pm$\,0.004 & 0.102\,$\pm$\,0.004 & 0.423\,$\pm$\,0.008 \\
+User-based KNN & 0.864\,$\pm$\,0.007 & 0.665\,$\pm$\,0.004 & 0.111\,$\pm$\,0.001 & 0.097\,$\pm$\,0.001 & 0.145\,$\pm$\,0.002 & 0.538\,$\pm$\,0.016 \\
+Item-based KNN & \textbf{0.854\,$\pm$\,0.007} & \textbf{0.653\,$\pm$\,0.004} & \textbf{0.182\,$\pm$\,0.002} & \textbf{0.154\,$\pm$\,0.003} & \textbf{0.245\,$\pm$\,0.004} & \textbf{0.706\,$\pm$\,0.010} \\
+SVD (matrix factorisation) & 0.864\,$\pm$\,0.007 & 0.664\,$\pm$\,0.004 & 0.016\,$\pm$\,0.006 & 0.012\,$\pm$\,0.005 & 0.018\,$\pm$\,0.009 & 0.131\,$\pm$\,0.046 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{table}[t]
+\centering
+\caption{Effect of the ranking score and of a minimum-support filter (candidates with $\geq 20$ training ratings). Mean over three splits.}
+\label{tab:ablation}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lccc}
+\toprule
+Variant & P@10 & NDCG@10 & HR@10 \\
+\midrule
+Item-KNN / similarity-sum score & 0.182 & 0.245 & 0.706 \\
+Item-KNN / similarity-sum score + support filter & 0.182 & 0.244 & 0.704 \\
+Item-KNN / predicted-rating score & 0.022 & 0.022 & 0.108 \\
+Item-KNN / predicted-rating score + support filter & 0.078 & 0.090 & 0.384 \\
+SVD / predicted-rating score & 0.016 & 0.018 & 0.131 \\
+SVD / predicted-rating score + support filter & 0.039 & 0.045 & 0.256 \\
+\bottomrule
+\end{tabular}
+\end{table}

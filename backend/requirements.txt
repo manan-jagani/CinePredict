@@ -1,0 +1,7 @@
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.27,<1.0
+numpy>=1.26
+pandas>=2.1
+scipy>=1.11
+pydantic>=2.6
+matplotlib>=3.8

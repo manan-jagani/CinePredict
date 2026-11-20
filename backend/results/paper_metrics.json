@@ -1,0 +1,23 @@
+{
+  "protocol": "Three random per-user 80/20 train-test splits; validation is carved from training only; seeds 42, 1, 2.",
+  "relevance": "Held-out rating >= 4.0; top K = 10.",
+  "models": [
+    {"name":"Global mean","rmse":"1.045 ± 0.003","mae":"0.829 ± 0.002","precision":"—","recall":"—","ndcg":"—","hit_rate":"—"},
+    {"name":"Popularity (rating count)","rmse":"—","mae":"—","precision":"0.117 ± 0.003","recall":"0.096 ± 0.004","ndcg":"0.155 ± 0.007","hit_rate":"0.553 ± 0.012"},
+    {"name":"Popularity (damped mean)","rmse":"0.977 ± 0.006","mae":"0.763 ± 0.003","precision":"0.098 ± 0.002","recall":"0.075 ± 0.003","ndcg":"0.122 ± 0.003","hit_rate":"0.487 ± 0.010"},
+    {"name":"Bias baseline","rmse":"0.876 ± 0.007","mae":"0.676 ± 0.004","precision":"0.080 ± 0.005","recall":"0.058 ± 0.004","ndcg":"0.102 ± 0.004","hit_rate":"0.423 ± 0.008"},
+    {"name":"User-based KNN","rmse":"0.864 ± 0.007","mae":"0.665 ± 0.004","precision":"0.111 ± 0.001","recall":"0.097 ± 0.001","ndcg":"0.145 ± 0.002","hit_rate":"0.538 ± 0.016"},
+    {"name":"Item-based KNN","rmse":"0.854 ± 0.007","mae":"0.653 ± 0.004","precision":"0.182 ± 0.002","recall":"0.154 ± 0.003","ndcg":"0.245 ± 0.004","hit_rate":"0.706 ± 0.010","best":true},
+    {"name":"SVD (matrix factorisation)","rmse":"0.864 ± 0.007","mae":"0.664 ± 0.004","precision":"0.016 ± 0.006","recall":"0.012 ± 0.005","ndcg":"0.018 ± 0.009","hit_rate":"0.131 ± 0.046"}
+  ],
+  "ablation": [
+    {"variant":"Item-KNN / similarity-sum score","precision":"0.182","ndcg":"0.245","hit_rate":"0.706"},
+    {"variant":"Item-KNN / similarity-sum + support filter","precision":"0.182","ndcg":"0.244","hit_rate":"0.704"},
+    {"variant":"Item-KNN / predicted-rating score","precision":"0.022","ndcg":"0.022","hit_rate":"0.108"},
+    {"variant":"Item-KNN / predicted-rating + support filter","precision":"0.078","ndcg":"0.090","hit_rate":"0.384"},
+    {"variant":"SVD / predicted-rating score","precision":"0.016","ndcg":"0.018","hit_rate":"0.131"},
+    {"variant":"SVD / predicted-rating + support filter","precision":"0.039","ndcg":"0.045","hit_rate":"0.256"}
+  ],
+  "selected_parameters": {"item_knn_k":640,"item_shrinkage":100,"item_damping":0,"ranking_neighbours_k_prime":20,"user_knn_k":320,"user_shrinkage":10,"user_damping":2,"svd_factors":60,"svd_regularization":0.1,"svd_epochs":20},
+  "notes": ["The MovieLens ml-latest-small release is a development snapshot, not a shared research benchmark.","The reported evaluation uses random per-user holdout, not chronological evaluation.","The offline protocol treats unobserved movies as non-relevant and no user study was run.","Cold-start users and movies with no ratings are not supported by collaborative filtering; the new-user mode asks for a few ratings.","The SVD comparison is limited to the predicted-rating ranking score and three tuned configurations; it is not a general verdict on matrix factorisation."]
+}
